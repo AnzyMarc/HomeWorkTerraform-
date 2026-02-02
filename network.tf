@@ -83,7 +83,13 @@ resource "yandex_vpc_security_group" "LAN" {
 resource "yandex_vpc_security_group" "web_sg" {
   name       = "web-sg-${var.data_string}"
   network_id = yandex_vpc_network.develop.id
-
+   
+   ingress{
+     description = "Allow ssh from internal"
+     protocol    = "TCP"
+     port        =  22
+     v4_cidr_blocks = ["10.0.1.0/24"]
+   }
 
   ingress {
     description    = "Allow HTTPS"

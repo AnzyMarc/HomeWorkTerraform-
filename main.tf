@@ -72,6 +72,8 @@ resource "yandex_compute_instance" "web_a" {
     nat                = false
     security_group_ids = [yandex_vpc_security_group.LAN.id, yandex_vpc_security_group.web_sg.id]
   }
+
+ 
 }
 
 resource "yandex_compute_instance" "web_b" {
@@ -107,6 +109,8 @@ resource "yandex_compute_instance" "web_b" {
     security_group_ids = [yandex_vpc_security_group.LAN.id, yandex_vpc_security_group.web_sg.id]
 
   }
+
+  
 }
 
 
