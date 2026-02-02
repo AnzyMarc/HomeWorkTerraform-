@@ -1,0 +1,45 @@
+---
+- name: test
+  gather_facts: false
+  hosts: webservers
+  vars:
+    ansible_ssh_user: user
+  become: yes
+
+  pre_tasks:
+    - name: Validating the ssh port is open and
+      ansible.builtin.wait_for:
+        host: "{{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}"
+        port: 22
+        delay: 5
+        timeout: 300
+        state: started
+        search_regex: OpenSSH
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+          
+    - name: Install Nginx
+      apt:
+        name: nginx 
+        state: latest
+
+    - name: Ensure Ngnix is started and enabled
+      service:
+        name: nginx
+        state: started
+        enabled: yes 
+
+    - name: verify Nginx is running and responding to http request        
+      ansible.builtin.uri:
+        url: "http://localhost:80"
+        method: GET
+        status_code: 200
+        validate_certs: no
+
+
+       
+      
