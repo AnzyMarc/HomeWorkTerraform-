@@ -73,6 +73,6 @@
 ###  Решение  Петровский А. Н
 
 
-[Снимок демонстрирует выполнение  playbook  ngnix.yml ](ngnix.yml)
+![Снимок демонстрирует выполнение  playbook  ngnix.yml ](ngnix.yml)
 
-[Вывод терминала]  (screenshots/terminal_out.png) 
+![Вывод терминала](screenshots/terminal_out.png) 
